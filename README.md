@@ -40,7 +40,7 @@ If manually creating tables, ensure they match the models in the project.
 
 ## Data for Database
 
-The following data is required for the database to predict game outcomes and calculate win probabilities. The data includes key performance indicators (KPIs) for each team, such as offensive and defensive performance, home and away records, and overall team performance.
+The following data is required for the database to predict game outcomes and calculate win probabilities. It contains key performance metrics for each NBA team, such as offensive and defensive performance, home and away records, and overall team performance.
 
 | TeamId | TeamName       | OffensiveHomePPG | OffensiveAwayPPG | DefensiveHomePPG | DefensiveAwayPPG | HomeRecord | AwayRecord | TotalRecord | Streak |
 |--------|----------------|------------------|------------------|------------------|------------------|------------|------------|-------------|--------|
@@ -67,8 +67,13 @@ The following data is required for the database to predict game outcomes and cal
 | 21     | Chicago        | 109.4            | 111.9            | 111.1            | 112              | 0.417      | 0.444      | 0.431       | 0.4    |
 | 22     | Charlotte      | 108.4            | 110.7            | 108.5            | 115.1            | 0.5        | 0.417      | 0.458       | 0.4    |
 | 23     | Houston        | 106.6            | 111              | 115.1            | 118.3            | 0.25       | 0.222      | 0.236       | 0.2    |
-
-Ensure that your database is structured to store these values, and that the appropriate algorithms are set up to process the data for predictions.
+| 24     | LA Lakers      | 110.4            | 106.6            | 107.3            | 105.6            | 0.583      | 0.583      | 0.583       | 0.6    |
+| 25     | Miami          | 108.2            | 106.8            | 109              | 108.2            | 0.583      | 0.528      | 0.556       | 0.5    |
+| 26     | Detroit        | 105.1            | 108.1            | 108.1            | 114              | 0.361      | 0.194      | 0.278       | 0.2    |
+| 27     | New York       | 108.4            | 104.3            | 104.8            | 104.6            | 0.694      | 0.444      | 0.569       | 0.5    |
+| 28     | Okla City      | 105.9            | 104.1            | 118              | 113.3            | 0.278      | 0.333      | 0.306       | 0.3    |
+| 29     | Orlando        | 105.4            | 102.6            | 114.4            | 112.2            | 0.306      | 0.278      | 0.292       | 0.3    |
+| 30     | Cleveland      | 107.5            | 100.2            | 114.3            | 110.2            | 0.361      | 0.25       | 0.306       | 0.4    |
 
 ### Data Fields Description
 - `TeamId`: A unique identifier for each NBA team.
@@ -81,6 +86,8 @@ Ensure that your database is structured to store these values, and that the appr
 - `AwayRecord`: Win percentage for the team away.
 - `TotalRecord`: Overall win percentage for the team.
 - `Streak`: The current win streak of the team (as a decimal).
+
+Ensure that your database is structured to store these values, and that the appropriate algorithms are set up to process the data for predictions.
 
 This dataset will provide the foundational data needed to make predictions about game outcomes based on team performance.
 
