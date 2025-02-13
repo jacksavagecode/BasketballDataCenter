@@ -1,5 +1,137 @@
-﻿@{
-    ViewData["Title"] = "Prediction Tools";
+﻿@model PredictionViewModel
+@{
+    ViewData["Title"] = "Prediction Tools Page";
 }
 
-<h1>This is the Prediction Tools Page</h1>
+<h1>This is prediction Tools page !</h1>
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+
+        <div class="row">
+            <div class="col-md-12">
+                <form action="/Home/AddFavouriteTeam" method="post">
+                    <div asp-validation-summary="All"></div>
+                    <div class="row form-group">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-6">
+                            <label asp-for="FavouriteTeam.TeamId">Your Favourite Team:</label>
+                            <select asp-for="FavouriteTeam.TeamId" name="FavouriteTeam.TeamId" asp-items="@Model.TeamSelectList" class="form-control">
+                                <option value="0">Select your favourite team</option>
+                            </select>
+                            <button type="submit" class="btn btn-outline-primary">Submit</button>
+                        </div>
+                        <div class="col-md-2"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row" style="border:1px solid black; margin:10px;">
+            <div class="col-md-12">
+                <p>Text Areat</p>
+            </div>
+        </div>
+
+        <div class="row" style="border:1px solid black; margin:10px;">
+            <div class="col-md-12">
+                <form action="/Home/GetPredictions" method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="row form-group">
+                        <div class="col-md-6">
+                            <label asp-for="SelectedTeams.HomeTeam.TeamId">Home Team</label>
+                            <select asp-for="SelectedTeams.HomeTeam.TeamId" name="SelectedTeams.HomeTeam.TeamId" asp-items="@Model.TeamSelectList" class="form-control">
+                                <option value="0">Select Home Team</option>
+                            </select>
+                            <span asp-validation-for="SelectedTeams.HomeTeam.TeamId" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="SelectedTeams.AwayTeam.TeamId">Away Team</label>
+                            <select asp-for="SelectedTeams.AwayTeam.TeamId" name="SelectedTeams.AwayTeam.TeamId" asp-items="@Model.TeamSelectList" class="form-control">
+                                <option value="0">Select Away Team</option>
+                            </select>
+                            <span asp-validation-for="SelectedTeams.AwayTeam.TeamId" class="text-danger"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="row" style="margin:10px;">
+                        <div class="col-md-5"></div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-outline-primary">Get Results</button>
+                        </div>
+                        <div class="col-md-5"></div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <fieldset>
+                                <legend>Formula 1:</legend>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p>Home Team Points: <span><strong>@Model.HomeTeamPoints</strong></span></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Away Team Points: <span><strong>@Model.AwayTeamPoints</strong></span></p>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <fieldset>
+                                <legend>Formula 2:</legend>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p>Home Team Percentage: <span><strong>@Model.TeamPrecentage</strong></span></p>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+
+        <div class="row" style="border:1px solid black;margin:10px;">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Team Name</th>
+                            <th scope="col">Offensive Home</th>
+                            <th scope="col">Offensive Away</th>
+                            <th scope="col">Defensive Home</th>
+                            <th scope="col">Defensive Away</th>
+                            <th scope="col">Home Record</th>
+                            <th scope="col">Away Record</th>
+                            <th scope="col">Total Record</th>
+                            <th scope="col">Streak</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@Model.FavouriteTeam.TeamName</td>
+                            <td>@Model.FavouriteTeam.OffensiveHomePPG</td>
+                            <td>@Model.FavouriteTeam.OffensiveAwayPPG</td>
+                            <td>@Model.FavouriteTeam.DefensiveHomePPG</td>
+                            <td>@Model.FavouriteTeam.DefensiveAwayPPG</td>
+                            <td>@Model.FavouriteTeam.HomeRecord</td>
+                            <td>@Model.FavouriteTeam.AwayRecord</td>
+                            <td>@Model.FavouriteTeam.TotalRecord</td>
+                            <td>@Model.FavouriteTeam.Streak</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-2"></div>
+</div>

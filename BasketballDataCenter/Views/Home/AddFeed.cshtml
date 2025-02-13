@@ -1,0 +1,32 @@
+﻿@model Feed
+@{
+}
+
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title">Add New Feed</h1>
+            </div>
+            <div class="card-body">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <form action="SubmitFeed" method="post">
+                    <input type="hidden" asp-for="FeedId" name="FeedId" />
+                    <input type="hidden" asp-for="LikeCount" name="LikeCount" />
+                    <input type="hidden" asp-for="CreationDate" name="CreationDate" />
+                    <input type="hidden" asp-for="UserId" name="UserId" />
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label asp-for="FeedContent" name="FeedContent">what's On your mind:</label>
+                            <textarea asp-for="FeedContent" name="FeedContent" rows="5" class="form-control"></textarea>
+                            <span asp-validation-for="FeedContent" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Feed</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>

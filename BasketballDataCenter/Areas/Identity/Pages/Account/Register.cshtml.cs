@@ -25,6 +25,7 @@ namespace BasketballDataCenter.Areas.Identity.Pages.Account
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<User> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<User> _userManager;
         private readonly IUserStore<User> _userStore;
         private readonly IUserEmailStore<User> _emailStore;
@@ -35,12 +36,14 @@ namespace BasketballDataCenter.Areas.Identity.Pages.Account
             UserManager<User> userManager,
             IUserStore<User> userStore,
             SignInManager<User> signInManager,
+            RoleManager<IdentityRole> roleManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
             _userManager = userManager;
             _userStore = userStore;
             _emailStore = GetEmailStore();
+            _roleManager = roleManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
@@ -108,6 +111,7 @@ namespace BasketballDataCenter.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+            public bool IsAdmin { get; set; } = false;
         }
 
 
@@ -140,6 +144,18 @@ namespace BasketballDataCenter.Areas.Identity.Pages.Account
 
                     if (result.Succeeded)
                     {
+                        if (Input.IsAdmin)
+                        {
+                            if (!(await _roleManager.RoleExistsAsync("Admin")))
+                                await _roleManager.CreateAsync(new IdentityRole() { Name = "Admin" });
+                            await _userManager.AddToRoleAsync(user, "Admin");
+                        }
+                        else
+                        {
+                            if (!(await _roleManager.RoleExistsAsync("User")))
+                                await _roleManager.CreateAsync(new IdentityRole() { Name = "User" });
+                            await _userManager.AddToRoleAsync(user, "User");
+                        }
                         _logger.LogInformation("User created a new account with password.");
 
                         var userId = await _userManager.GetUserIdAsync(user);
